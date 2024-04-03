@@ -30,6 +30,7 @@ async function run() {
 
     const usersCollection = client.db('Tech-Oasis-DB').collection('user')
     const gadgetsCollection = client.db('Tech-Oasis-DB').collection('gadgets')
+    const reviewsCollection = client.db('Tech-Oasis-DB').collection('reviews')
  
     // user 
     
@@ -56,14 +57,18 @@ async function run() {
     res.send(result)
   })
 
-
     app.post('/gadgets', async (req, res) => {
       const gadget = req.body
       const result = await gadgetsCollection.insertOne(gadget)
       res.send(result)
     }) 
 
-    
+    //review
+
+    app.get('/reviews', async (req, res) => {
+      const result = await reviewsCollection.find().toArray()
+      res.send(result)
+    })
 
 
     
