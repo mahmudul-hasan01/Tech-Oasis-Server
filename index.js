@@ -29,8 +29,10 @@ async function run() {
   try {
 
     const usersCollection = client.db('Tech-Oasis-DB').collection('user')
-
-
+    const gadgetsCollection = client.db('Tech-Oasis-DB').collection('gadgets')
+ 
+    // user 
+    
     app.post('/users', async (req, res) => {
         const user = req.body
         const query = { email: user.email }
@@ -41,6 +43,18 @@ async function run() {
         const result = await usersCollection.insertOne(user)
         res.send(result)
       })
+
+   // Gadgets
+
+    app.post('/gadgets', async (req, res) => {
+      const gadget = req.body
+      const result = await gadgetsCollection.insertOne(gadget)
+      res.send(result)
+    }) 
+
+    
+
+
     
     await client.connect();
     await client.db("admin").command({ ping: 1 });
