@@ -46,6 +46,17 @@ async function run() {
 
    // Gadgets
 
+   app.get('/gadgets', async (req, res) => {
+    const search = req.query.search
+    console.log(search);
+    const query = {
+      category: { $regex: search, $options: 'i' }
+    }
+    const result = await gadgetsCollection.find(query).toArray()
+    res.send(result)
+  })
+
+
     app.post('/gadgets', async (req, res) => {
       const gadget = req.body
       const result = await gadgetsCollection.insertOne(gadget)
