@@ -13,7 +13,7 @@ app.use(express.json())
 
 
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.uoehazd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -49,10 +49,16 @@ async function run() {
 
    app.get('/gadgets', async (req, res) => {
     const search = req.query.search
-    console.log(search);
     const query = {
       category: { $regex: search, $options: 'i' }
     }
+    const result = await gadgetsCollection.find(query).toArray()
+    res.send(result)
+  })
+
+   app.get('/gadget/:id', async (req, res) => {
+    const id = req.params.id
+    const query = {_id: new ObjectId(id)}
     const result = await gadgetsCollection.find(query).toArray()
     res.send(result)
   })
@@ -61,7 +67,27 @@ async function run() {
       const gadget = req.body
       const result = await gadgetsCollection.insertOne(gadget)
       res.send(result)
-    }) 
+    })
+    
+    app.patch('/gadgets/:id', async (req, res) => {
+      const id = req.params.id
+      const query = { _id: new ObjectId(id) }
+      const item = req.body
+      console.log(item);
+      const updatedDoc = {
+        $set: {
+          name: item.name,
+          category: item.category,
+          price: item.price,
+          rating: item.rating,
+          datails: item.datails
+        }
+      }
+      const result = await gadgetsCollection.updateOne(query, updatedDoc)
+      res.send(result)
+    })
+
+
 
     //review
 
