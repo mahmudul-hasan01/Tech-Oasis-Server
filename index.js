@@ -24,7 +24,6 @@ mongoose.connect('mongodb://localhost/Tech-Oasis', {
   .then(() => console.log('Mongoose successfully Connect'))
   .catch((err) => {
     console.log(err)
-    //     process.exit(1)
   })
 
   app.use('/users', pathHandler)

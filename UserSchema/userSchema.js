@@ -7,10 +7,18 @@ const userSchema = mongoose.Schema({
         type:String,
         require: true,
     },
-    email: String,
-    role: String,
+    email: {
+        type: String,
+        require: true,
+        unique: true,
+    },
+    role: {
+        type: String,
+        require: true,
+    },
     status:{
         type: String,
+        require: true,
     },
 }, {timestamps:true})
 
