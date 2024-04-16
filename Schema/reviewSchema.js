@@ -6,7 +6,7 @@ const reviewSchema = mongoose.Schema({
     rating:Number,
     details:String,    
 
-}, {timestamps:true})
+})
 
 const reviewModel = mongoose.model('review', reviewSchema)
 

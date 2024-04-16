@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const itemModel = require('../Schema/itemSchema')
 
-// get all user
+
 router.get('/', async (req, res) => {
   try {
     const search = req.query.search;
@@ -16,14 +16,12 @@ router.get('/', async (req, res) => {
   }
 })
 
-// get a user
 router.get('/:id', async (req, res) => {
-  const user = await itemModel.findById(req.params.id)
-  if (!user) return res.send(404).json({ error: 'user not found' })
-  res.send(user)
+  const data = await itemModel.findById(req.params.id)
+  // if (!data) return res.send(404).json({ error: 'data not found' })
+  res.send(data)
 })
 
-// post user
 router.post('/', async (req, res) => {
   const data = req.body
   const result = await itemModel.create(data)
@@ -31,13 +29,12 @@ router.post('/', async (req, res) => {
 })
 
 
-// put user
 router.patch('/:id', async (req, res) => {
   const updataUser = await itemModel.findByIdAndUpdate(req.params.id, { name: "Sakib " })
   res.send(updataUser)
 })
 
-// delete user
+
 router.delete('/:id', async (req, res) => {
   const deleteUser = await itemModel.findByIdAndDelete(req.params.id)
   res.send(deleteUser)
