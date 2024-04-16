@@ -5,6 +5,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const userHandler = require('./PathHandler/userHandlers')
 const itemHandler =require('./PathHandler/itemHandlers')
+const reviewHandler = require('./PathHandler/reviewHandlers')
 const port = process.env.PORT || 5000
 
 
@@ -29,6 +30,7 @@ mongoose.connect('mongodb://localhost/Tech-Oasis', {
 
   app.use('/users', userHandler)
   app.use('/gadgets',itemHandler)
+  app.use('/reviews',reviewHandler)
 
 
 // const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
@@ -75,14 +77,14 @@ mongoose.connect('mongodb://localhost/Tech-Oasis', {
 //       res.send(result)
 //     })
 
-    // app.get('/gadgets', async (req, res) => {
-    //   const search = req.query.search
-    //   const query = {
-    //     category: { $regex: search, $options: 'i' }
-    //   }
-    //   const result = await gadgetsCollection.find(query).toArray()
-    //   res.send(result)
-    // })
+//     app.get('/gadgets', async (req, res) => {
+//       const search = req.query.search
+//       const query = {
+//         category: { $regex: search, $options: 'i' }
+//       }
+//       const result = await gadgetsCollection.find(query).toArray()
+//       res.send(result)
+//     })
 
 //     app.get('/gadget/:id', async (req, res) => {
 //       const id = req.params.id
