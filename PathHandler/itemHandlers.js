@@ -6,13 +6,23 @@ const itemModel = require('../Schema/itemSchema')
 router.get('/', async (req, res) => {
   try {
     const search = req.query.search;
-    console.log(search);
-    const regex = new RegExp(search, 'i'); 
+    const regex = new RegExp(search, 'i');
     const result = await itemModel.find({ category: regex });
     res.send(result);
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');
+  }
+})
+
+router.get('/category', async (req, res) => {
+  try {
+    const categoryName = req.query.name;
+    const category = await itemModel.find({ category: categoryName });
+    res.json(category);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Internal server error' });
   }
 })
 
@@ -30,7 +40,14 @@ router.post('/', async (req, res) => {
 
 
 router.patch('/:id', async (req, res) => {
-  const updataUser = await itemModel.findByIdAndUpdate(req.params.id, { name: "Sakib " })
+  const body = (req.body);
+  const updataUser = await itemModel.findByIdAndUpdate(req.params.id, {
+    name: body.name,
+    category: body.category,
+    rating: body.rating,
+    price: body.price,
+    datails: body.datails
+  })
   res.send(updataUser)
 })
 
