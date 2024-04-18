@@ -8,6 +8,7 @@ const itemHandler =require('./PathHandler/itemHandlers')
 const reviewHandler = require('./PathHandler/reviewHandlers')
 const upComingHandler = require('./PathHandler/upComingHandlers')
 const addItemHandler = require('./PathHandler/AddItemHandlers')
+const paymentIntentHanler = require('./PathHandler/paymentIntentHandlers')
 const paymentHanler = require('./PathHandler/paymentHandlers')
 const port = process.env.PORT || 5000
 
@@ -36,7 +37,8 @@ mongoose.connect('mongodb://localhost/Tech-Oasis', {
   app.use('/gadgets',itemHandler)
   app.use('/upcoming',upComingHandler)
   app.use('/shopingItem',addItemHandler)
-  app.use('/payment-intent',paymentHanler)
+  app.use('/payment-intent',paymentIntentHanler)
+  app.use('/payment',paymentHanler)
 
 
 // const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');

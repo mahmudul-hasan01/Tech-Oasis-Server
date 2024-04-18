@@ -2,10 +2,10 @@ const express = require('express')
 const router = express.Router()
 const reviewModel = require('../Schema/reviewSchema')
 
-// get all user
+// get all review
 router.get('/', async (req, res) => {
-  const users = await reviewModel.find({})
-  res.send(users)
+  const reviews = await reviewModel.find({})
+  res.send(reviews)
 })
 
 module.exports = router
