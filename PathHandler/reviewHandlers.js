@@ -8,4 +8,10 @@ router.get('/', async (req, res) => {
   res.send(reviews)
 })
 
+router.post('/', async (req, res) => {
+  const data = req.body
+  const result = await reviewModel.create(data)
+  res.status(201).send(result)
+})
+
 module.exports = router
