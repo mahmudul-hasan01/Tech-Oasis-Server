@@ -5,7 +5,12 @@ const userModel = require('../Schema/userSchema')
 // get all user
 router.get('/', async (req, res) => {
   const users = await userModel.find({})
-  res.send(users)
+  res.send({users})
+})
+
+router.get('/role/:email', async (req, res) => {
+  const data = await userModel.findOne({ email: req.params.email })
+  res.json(data)
 })
 
 // get a user
@@ -24,8 +29,12 @@ router.post('/', async (req, res) => {
 
 
 // put user
-router.patch('/:id', async (req, res) => {
-  const updataUser = await userModel.findByIdAndUpdate(req.params.id, {name: "Sakib "})
+router.patch('/admin/:id', async (req, res) => {
+  const role = 'admin'
+  const updataUser = await userModel.findByIdAndUpdate(req.params.id, 
+    {
+      role: role
+    })
   res.send(updataUser)
 })
 

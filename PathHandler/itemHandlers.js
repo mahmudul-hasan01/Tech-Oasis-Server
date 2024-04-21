@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     const search = req.query.search;
     const regex = new RegExp(search, 'i');
     const result = await itemModel.find({ category: regex });
-    res.send(result);
+    res.send({result});
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');

@@ -10,6 +10,7 @@ const upComingHandler = require('./PathHandler/upComingHandlers')
 const addItemHandler = require('./PathHandler/AddItemHandlers')
 const paymentIntentHanler = require('./PathHandler/paymentIntentHandlers')
 const paymentHanler = require('./PathHandler/paymentHandlers')
+const adminStats = require('./Admin-Stats/AdminStats')
 const port = process.env.PORT || 5000
 
 
@@ -22,6 +23,8 @@ app.use(cors({
 }))
 app.use(express.json())
 
+
+const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.uoehazd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 mongoose.connect('mongodb://localhost/Tech-Oasis', {
   useNewUrlParser: true,
@@ -39,6 +42,7 @@ mongoose.connect('mongodb://localhost/Tech-Oasis', {
   app.use('/shopingItem',addItemHandler)
   app.use('/payment-intent',paymentIntentHanler)
   app.use('/payment',paymentHanler)
+  app.use('/admin-stats',adminStats)
 
 
 // const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
