@@ -4,18 +4,19 @@ require('dotenv').config()
 const cors = require('cors')
 const mongoose = require('mongoose')
 const userHandler = require('./PathHandler/userHandlers')
-const itemHandler =require('./PathHandler/itemHandlers')
+const itemHandler = require('./PathHandler/itemHandlers')
 const reviewHandler = require('./PathHandler/reviewHandlers')
 const upComingHandler = require('./PathHandler/upComingHandlers')
 const addItemHandler = require('./PathHandler/AddItemHandlers')
 const paymentIntentHanler = require('./PathHandler/paymentIntentHandlers')
 const paymentHanler = require('./PathHandler/paymentHandlers')
 const adminStats = require('./Admin-Stats/AdminStats')
+const orderStats = require('./Order-Stats/OrderStats')
 const port = process.env.PORT || 5000
 
 
 app.use(cors({
-  origin: [ 
+  origin: [
     'http://localhost:5173',
     // 'https://tech-oasis.web.app'
   ],
@@ -26,6 +27,9 @@ app.use(express.json())
 
 const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.uoehazd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
+
+// 'mongodb://localhost/Tech-Oasis'
+
 mongoose.connect('mongodb://localhost/Tech-Oasis', {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -35,14 +39,15 @@ mongoose.connect('mongodb://localhost/Tech-Oasis', {
     console.log(err)
   })
 
-  app.use('/users', userHandler)
-  app.use('/reviews',reviewHandler)
-  app.use('/gadgets',itemHandler)
-  app.use('/upcoming',upComingHandler)
-  app.use('/shopingItem',addItemHandler)
-  app.use('/payment-intent',paymentIntentHanler)
-  app.use('/payment',paymentHanler)
-  app.use('/admin-stats',adminStats)
+app.use('/users', userHandler)
+app.use('/reviews', reviewHandler)
+app.use('/gadgets', itemHandler)
+app.use('/upcoming', upComingHandler)
+app.use('/shopingItem', addItemHandler)
+app.use('/payment-intent', paymentIntentHanler)
+app.use('/payment', paymentHanler)
+app.use('/admin-stats', adminStats)
+app.use('/order-stats', orderStats)
 
 
 // const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');

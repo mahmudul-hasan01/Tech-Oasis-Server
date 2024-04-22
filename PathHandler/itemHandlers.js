@@ -3,12 +3,18 @@ const router = express.Router()
 const itemModel = require('../Schema/itemSchema')
 
 
+// router.get('/', async (req, res) => {
+//   const data = await itemModel.findByIdAndUpdate()
+//   // if (!data) return res.send(404).json({ error: 'data not found' })
+//   res.send(data)
+// })
+
 router.get('/', async (req, res) => {
   try {
     const search = req.query.search;
     const regex = new RegExp(search, 'i');
     const result = await itemModel.find({ category: regex });
-    res.send({result});
+    res.send(result);
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');

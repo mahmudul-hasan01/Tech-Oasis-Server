@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
   
 
   router.patch('/:id', async (req, res) => {
-    const updataData = await upComingModel.findByIdAndUpdate(req.params.id, { name: "Sakib " })
+    const updataData = await upComingModel.findByIdAndUpdate(req.params.id,)
     res.send(updataData)
   })
   
