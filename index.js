@@ -17,8 +17,8 @@ const port = process.env.PORT || 5000
 
 app.use(cors({
   origin: [
-    'http://localhost:5173',
-    // 'https://tech-oasis.web.app'
+    // 'http://localhost:5173',
+    'https://tech-oasis.web.app'
   ],
   credentials: true
 }))
@@ -30,7 +30,7 @@ const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.
 
 // 'mongodb://localhost/Tech-Oasis'
 
-mongoose.connect('mongodb://localhost/Tech-Oasis', {
+mongoose.connect(uri, {dbName: 'Tech-Oasis'}, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })

@@ -20,14 +20,6 @@ router.get('/', async (req, res) => {
             }
         },
         // {
-        //     $lookup: {
-        //         from: 'gadgets',
-        //         localField: 'productItemIds',
-        //         foreignField: '_id',
-        //         as: 'productItem'
-        //     }
-        // },
-        // {
         //     $unwind: '$productItem'
         //   },
     ])
