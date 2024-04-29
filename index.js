@@ -12,15 +12,16 @@ const paymentIntentHanler = require('./PathHandler/paymentIntentHandlers')
 const paymentHanler = require('./PathHandler/paymentHandlers')
 const adminStats = require('./Admin-Stats/AdminStats')
 const orderStats = require('./Order-Stats/OrderStats')
+const verifyTokenPath = require('./PathHandler/verifyTokenPath')
 const port = process.env.PORT || 5000
 
 
 app.use(cors({
   origin: [
-    // 'http://localhost:5173',
+    'http://localhost:5173',
     'https://tech-oasis.web.app'
   ],
-  credentials: true
+  // credentials: true
 }))
 app.use(express.json())
 
@@ -48,6 +49,9 @@ app.use('/payment-intent', paymentIntentHanler)
 app.use('/payment', paymentHanler)
 app.use('/admin-stats', adminStats)
 app.use('/order-stats', orderStats)
+app.use('/jwt', verifyTokenPath)
+
+
 
 
 // const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
