@@ -23,6 +23,11 @@ router.get('/:id', async (req, res) => {
 // post user
 router.post('/', async (req, res) => {
   const data = req.body
+  const query = { email: data.email }
+  const existingUser = await userModel.findOne(query)
+  if (existingUser) {
+    return res.send({ message: 'user already exists', insertedId: null })
+  }
   const result = await userModel.create(data)
   res.status(201).send(result)
 })

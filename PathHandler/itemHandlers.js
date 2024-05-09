@@ -24,6 +24,7 @@ router.get('/', async (req, res) => {
 router.get('/category', async (req, res) => {
   try {
     const categoryName = req.query.name;
+    console.log(categoryName);
     const category = await itemModel.find({ category: categoryName });
     res.json(category);
   } catch (err) {
